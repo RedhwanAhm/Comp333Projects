@@ -8,10 +8,7 @@
 ; This function rotates the list one element to the left, head wrapping around to tail.
 ; Hint: If list is empty or one element, value is the original list. Else append the cdr of the lsit to the list consisting of the car.
 (define (rotate-list-left x)
-  (cond
-    ((null? x) '())
-    (else (append (cdr x) (cons (car x) '())))
-  )
+  
 )
 
 
@@ -19,91 +16,55 @@
 ; This function rotates the list to the left 'n' times, head wrapping around to tail.
 ; Hint: If 'n' is zero, the value is x. Else call the function recursively, replace x with (rotate-list-left x) and 'n' with 'n-1'.
 (define (rotate-list-left-n x n)
-  (cond
-    ((= n 0) x)
-    (else (rotate-list-left-n (rotate-list-left x) (- n 1)))
-  )
-  )
+  
+)
 
 ; COUNT LIST ELEMENTS
 ; This function will return the number of elements in the list.
 ; Hint: If list is empty, return 0. Else 1 + recursive call on the cdr of x.
 (define (count-list-elements x)
-  (cond
-    ((empty? x) 0)
-    (else (+ 1 (count-list-elements(cdr x))))
-    )
+
 )
 
 ; LIST ELEMENT N
 ; This function finds the 'nth' element in the list. Elements are numbered from 0 to length-1.
 ; Hint: If 'n' is 0, value is car of x. Else call the function recursively replacing x with the cdr of x and 'n' with 'n-1'.
 (define (list-element-n x n)
-  (cond
-    ((= n 0) (car x))
-    (else (list-element-n (cdr x) (- n 1)))
-  )
+
 )
 
 ; LIST MINUS ELEMENT N
 ; This function will remove the 'nth' element from the list x.
 ; Hint: If 'n' is 0, value is cdr of x. Else construct car x to the value of the recursive function call, replace x with cdr x, and 'n' with 'n-1'.
 (define (list-minus-element-n x n)
-  (cond
-    ((= n 0) (cdr x))
-    (else
-     (cons (car x) (list-minus-element-n (cdr x) (- n 1)))
-    )
-  )
+
 )
 
 ; ROTATE LIST RIGHT
 ; This function rotates the list one element to the right, tail wrapping around to head.
 ; Hint: Find element n-1, cons to list-minus-element n-1.
-(define (rotate-list-right x)
-  (cons (list-element-n x (- (count-list-elements x) 1)) (list-minus-element-n x (- (count-list-elements x) 1)))
+(define (rotate-list-left x)
+  
 )
 
 ; REVERSE LIST
 ; This function reverses the list x.
 ; If list is empty or contains one element, value is x. Else append the recursive call on cdr of x to list of car of x.
 (define (reverse-list x)
-  (cond
-    ((null? x) x)
-    (else
-     
 
-    )
-  )
 )
 
 ; CONS TO ALL
 ; Use cons to append a to the head of each element of x. Note that each element of x is a list. Use map to apply operation to each element of a list.
 (define (cons-to-all a x)
-  x
+
 )
 
 ; PERMUTE
 ; Generate all permutations of the original list. Value is the list of list of all permutations.
 ; Hint: If list has 1 element, return list of original list version of that one item. If List has 2 elements, return list of original list and reverse of originial list.
-(define (permute x)
-  (cond
-    ((= 1 (length x)) (list x))
-    ((= 2 (length x)) (list x))
-    (else (ph-2 x 0))
-  )
-)
+; Hint (cont.): Else general case which calls the helper functions defined below.
 
-(define (ph-2 x n)
-  (cond
-    ((=  n (- (length x) 1)) (append (ph-1 x n)))
-    (else (ph-1 x n)(ph-2 x (+ n 1)))
-  )
-)
-
-(define (ph-1 x n)
-  (cons-to-all (list-element-n x n) (permute(list-minus-element-n x n)))
-)
 
 
 
@@ -132,12 +93,12 @@
 (rotate-list-right '(a b c d e f g))  ; '(g a b c d e f) 
 (reverse-list '(a))   ; '(a) 
 (reverse-list '(a b))   ; '(b a) 
-(reverse-list '(a b c d e))   ; '(e d c b a)
-;(cons-to-all 'a '((b c) (d e) (f g)))  ; '((a b c) (a d e) (a f g)) 
+(reverse-list '(a b c d e))   ; '(e d c b a) 
+(cons-to-all 'a '((b c) (d e) (f g)))  ; '((a b c) (a d e) (a f g)) 
  
-;(permute '(a b))    ; '((a b) (b a)) 2! = 2 permutations 
-;(permute '(a b c))   ; '((c a b) (c b a) (b a c) (b c a) (a b c) (a c b)) 3! = 6 permutations 
-;(permute '(a b c d))
+(permute '(a b))    ; '((a b) (b a)) 2! = 2 permutations 
+(permute '(a b c))   ; '((c a b) (c b a) (b a c) (b c a) (a b c) (a c b)) 3! = 6 permutations 
+(permute '(a b c d))
 
 ; '((d c a b)  (d c b a)  (d b a c)  (d b c a)  (d a b c)  4! = 24 permutations 
 ;  (d a c b)  (c d a b)  (c d b a)  (c b a d)  (c b d a) 
