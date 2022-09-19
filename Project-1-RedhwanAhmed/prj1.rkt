@@ -9,7 +9,8 @@
 ; Hint: If list is empty or one element, value is the original list. Else append the cdr of the lsit to the list consisting of the car.
 (define (rotate-list-left x)
   (cond
-    ((null? x) '())
+    ((null? x) x)
+    ((= (length x) 1) x)
     (else (append (cdr x) (cons (car x) '())))
   )
 )
@@ -70,9 +71,9 @@
 (define (reverse-list x)
   (cond
     ((null? x) x)
+    ((= (length x) 1) x)
     (else
-     
-
+     (append (reverse-list(cdr x)) (list(car x)))
     )
   )
 )
@@ -80,7 +81,7 @@
 ; CONS TO ALL
 ; Use cons to append a to the head of each element of x. Note that each element of x is a list. Use map to apply operation to each element of a list.
 (define (cons-to-all a x)
-  x
+  
 )
 
 ; PERMUTE
@@ -133,7 +134,7 @@
 (reverse-list '(a))   ; '(a) 
 (reverse-list '(a b))   ; '(b a) 
 (reverse-list '(a b c d e))   ; '(e d c b a)
-;(cons-to-all 'a '((b c) (d e) (f g)))  ; '((a b c) (a d e) (a f g)) 
+(cons-to-all 'a '((b c) (d e) (f g)))  ; '((a b c) (a d e) (a f g)) 
  
 ;(permute '(a b))    ; '((a b) (b a)) 2! = 2 permutations 
 ;(permute '(a b c))   ; '((c a b) (c b a) (b a c) (b c a) (a b c) (a c b)) 3! = 6 permutations 
