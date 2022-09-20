@@ -81,7 +81,7 @@
 ; CONS TO ALL
 ; Use cons to append a to the head of each element of x. Note that each element of x is a list. Use map to apply operation to each element of a list.
 (define (cons-to-all a x)
-  
+  (map (lambda(v) (cons a v)) x)
 )
 
 ; PERMUTE
@@ -90,25 +90,21 @@
 (define (permute x)
   (cond
     ((= 1 (length x)) (list x))
-    ((= 2 (length x)) (list x))
+    ((= 2 (length x)) (list x (reverse x)))
     (else (ph-2 x 0))
   )
 )
 
 (define (ph-2 x n)
   (cond
-    ((=  n (- (length x) 1)) (append (ph-1 x n)))
-    (else (ph-1 x n)(ph-2 x (+ n 1)))
-  )
+    ((= n(- (length x) 1))
+      (ph-1 x n))
+    (else (append(ph-1 x n)(ph-2 x (+ n 1)))))
 )
 
 (define (ph-1 x n)
-  (cons-to-all (list-element-n x n) (permute(list-minus-element-n x n)))
+  (cons-to-all (list-element-n x n)(permute(list-minus-element-n x n)))
 )
-
-
-
-
 
 ; Test Cases
 (rotate-list-left '())   ; '() 
@@ -136,9 +132,9 @@
 (reverse-list '(a b c d e))   ; '(e d c b a)
 (cons-to-all 'a '((b c) (d e) (f g)))  ; '((a b c) (a d e) (a f g)) 
  
-;(permute '(a b))    ; '((a b) (b a)) 2! = 2 permutations 
-;(permute '(a b c))   ; '((c a b) (c b a) (b a c) (b c a) (a b c) (a c b)) 3! = 6 permutations 
-;(permute '(a b c d))
+(permute '(a b))    ; '((a b) (b a)) 2! = 2 permutations 
+(permute '(a b c))   ; '((c a b) (c b a) (b a c) (b c a) (a b c) (a c b)) 3! = 6 permutations 
+(permute '(a b c d))
 
 ; '((d c a b)  (d c b a)  (d b a c)  (d b c a)  (d a b c)  4! = 24 permutations 
 ;  (d a c b)  (c d a b)  (c d b a)  (c b a d)  (c b d a) 
